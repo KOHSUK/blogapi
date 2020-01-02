@@ -62,6 +62,10 @@ REST_FRAMEWORK = {
         # Tokens are used to pass authentication credentials back and forth in HTTP headers.
         'rest_framework.authentication.TokenAuthentication'
     ],
+    # 本には書いていないが、CoreAPIは今後廃止され、OpenAPIに置き換わるため、
+    # 下記の設定を入れないと、CoreAPIが使用できない
+    # https://www.django-rest-framework.org/community/3.10-announcement/
+    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
 }
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
