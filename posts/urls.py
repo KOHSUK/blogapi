@@ -1,7 +1,21 @@
+# routerとviewsetsを使えばurlpatternsは自動生成できる
 from django.urls import path
-from .views import PostList, PostDetail
+from rest_framework.routers import SimpleRouter
 
-urlpatterns = [
-    path('<int:pk>/', PostDetail.as_view()),
-    path('', PostList.as_view()),
-]
+from .views import UserViewSet, PostViewSet
+
+router = SimpleRouter()
+router.register('users', UserViewSet, base_name='users')
+router.register('', PostViewSet, base_name='posts')
+
+urlpatterns = router.urls
+
+#from django.urls import path
+#from .views import PostList, PostDetail, UserList, UserDetail
+#
+#urlpatterns = [
+#    path('users/', UserList.as_view()),
+#    path('users/<int:pk>/', UserDetail.as_view()),
+#    path('<int:pk>/', PostDetail.as_view()),
+#    path('', PostList.as_view()),
+#]
