@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     # 3rd-party apps
     'rest_framework',
     'rest_framework.authtoken',
+    'rest_framework_swagger',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
@@ -64,6 +65,8 @@ REST_FRAMEWORK = {
     ],
     # 本には書いていないが、CoreAPIは今後廃止され、OpenAPIに置き換わるため、
     # 下記の設定を入れないと、CoreAPIが使用できない
+    # どうもdjango-rest-swaggerも以下の設定を必要とするよう。。。
+    # OpenAPIを使う方法は色々あるみたいなので、別の方法を調べるほうが良いかも。
     # https://www.django-rest-framework.org/community/3.10-announcement/
     'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
 }
@@ -71,6 +74,11 @@ REST_FRAMEWORK = {
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 SITE_ID = 1
+
+SWAGGER_SETTINGS = {
+    'LOGIN_URL': 'rest_framework:login',
+    'LOGOUT_URL': 'rest_framework:logout',
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
